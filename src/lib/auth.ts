@@ -39,11 +39,21 @@ export async function updatePassword(password: string) {
 }
 
 export async function getCurrentUser() {
-  const { data } = await supabase.auth.getUser();
-  return data?.user || null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    return data?.user || null;
+  } catch (error) {
+    console.error("Error getting current user:", error);
+    return null;
+  }
 }
 
 export async function getSession() {
-  const { data } = await supabase.auth.getSession();
-  return data.session;
+  try {
+    const { data } = await supabase.auth.getSession();
+    return data.session;
+  } catch (error) {
+    console.error("Error getting session:", error);
+    return null;
+  }
 }

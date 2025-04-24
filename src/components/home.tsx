@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./layout/Navbar";
-import HeroCarousel from "./home/HeroCarousel";
+import FullscreenHeroCarousel from "./home/FullscreenHeroCarousel";
 import CategorySection from "./home/CategorySection";
 import ProductGrid from "./products/ProductGrid";
 import CartPreview from "./cart/CartPreview";
 import CapCustomizer from "./customizer/CapCustomizer";
 import { useCart } from "@/contexts/CartContext";
+import LoadingOverlay from "./home/LoadingOverlay";
 
 const Home = () => {
   const [isCartOpen, setIsCartOpen] = React.useState(false);
@@ -15,11 +16,14 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Loading Overlay */}
+      <LoadingOverlay duration={2500} />
+
       {/* Navbar */}
       <Navbar />
 
       {/* Hero Carousel */}
-      <HeroCarousel />
+      <FullscreenHeroCarousel />
 
       {/* Category Section */}
       <CategorySection />

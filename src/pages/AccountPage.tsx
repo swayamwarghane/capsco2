@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,11 +16,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Package, Heart, LogOut } from "lucide-react";
+import { User, Package, Heart, LogOut, ShoppingCart } from "lucide-react";
+import CartPreview from "@/components/cart/CartPreview";
 
 const AccountPage = () => {
   const { section = "profile" } = useParams<{ section: string }>();
   const { user, loading, signOut } = useAuth();
+  const { addItem } = useCart();
+  const [showCart, setShowCart] = useState(false);
   const navigate = useNavigate();
 
   // Redirect to login if not authenticated
@@ -301,7 +305,24 @@ const AccountPage = () => {
                               ${item.price.toFixed(2)}
                             </p>
                             <div className="flex space-x-2">
-                              <Button className="flex-1">Add to Cart</Button>
+                              <Button
+                                className="flex-1"
+                                onClick={() => {
+                                  addItem({
+                                    id: item.id,
+                                    name: item.name,
+                                    price: item.price,
+                                    quantity: 1,
+                                    color: "#000000",
+                                    size: "M",
+                                    image: item.image,
+                                  });
+                                  setShowCart(true);
+                                }}
+                              >
+                                <ShoppingCart className="mr-2 h-4 w-4" />
+                                Add to Cart
+                              </Button>
                               <Button variant="outline" size="icon">
                                 <Heart className="h-4 w-4 fill-current" />
                               </Button>
@@ -332,6 +353,9 @@ const AccountPage = () => {
         </div>
       </div>
     </div>
+
+    {/* Cart Preview */}
+    <CartPreview isOpen={showCart} onClose={() => setShowCart(false)} />
   );
 };
 

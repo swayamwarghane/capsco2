@@ -21,7 +21,7 @@ interface HeroCarouselProps {
   }[];
 }
 
-const HeroCarousel = ({
+const NewHeroCarousel = ({
   slides = [
     {
       id: "1",
@@ -174,4 +174,4 @@ const HeroCarousel = ({
   );
 };
 
-export default HeroCarousel;
+export default NewHeroCarousel;

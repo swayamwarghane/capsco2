@@ -50,7 +50,7 @@ const CartPreview = ({
                 <ShoppingCart className="h-5 w-5 mr-2" />
                 <h2 className="text-lg font-semibold">Your Cart</h2>
                 <span className="ml-2 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                  {cartItems.length} items
+                  {items.length} items
                 </span>
               </div>
               <Button

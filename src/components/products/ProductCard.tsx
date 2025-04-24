@@ -217,7 +217,22 @@ const ProductCard = ({
                 </div>
               </div>
 
-              <Button className="w-full flex items-center justify-center gap-2">
+              <Button
+                className="w-full flex items-center justify-center gap-2"
+                onClick={() => {
+                  addItem({
+                    id,
+                    name,
+                    price,
+                    quantity: 1,
+                    color: colors[0] || "#000000",
+                    size: "M",
+                    image,
+                  });
+                  setShowCart(true);
+                  setShowQuickView(false);
+                }}
+              >
                 <ShoppingCart className="h-5 w-5" />
                 Add to Cart
               </Button>

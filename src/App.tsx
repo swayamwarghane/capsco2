@@ -1,7 +1,6 @@
 import { Suspense, lazy } from "react";
-import { useRoutes, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./components/home";
-import routes from "tempo-routes";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
 
@@ -37,9 +36,7 @@ function App() {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/account/:section" element={<AccountPage />} />
-              {import.meta.env.VITE_TEMPO && <Route path="/tempobook/*" />}
             </Routes>
-            {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
           </>
         </Suspense>
       </CartProvider>
