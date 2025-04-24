@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import "./animations.css";
 
 interface HeroSlide {
@@ -12,6 +13,7 @@ interface HeroSlide {
 }
 
 const FullscreenHeroCarousel: React.FC = () => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
 
@@ -145,7 +147,7 @@ const FullscreenHeroCarousel: React.FC = () => {
           size="lg"
           className="bg-blue-600 text-white hover:bg-blue-700 font-semibold text-lg px-10 py-3 h-auto rounded-md shadow-lg"
           onClick={() => {
-            window.location.href = "/products";
+            navigate("/products");
           }}
         >
           <ShoppingBag className="mr-2 h-5 w-5" />

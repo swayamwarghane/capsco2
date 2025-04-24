@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -52,6 +53,7 @@ const HeroCarousel = ({
     },
   ],
 }: HeroCarouselProps) => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
 
@@ -116,7 +118,7 @@ const HeroCarousel = ({
                       <Button
                         size="lg"
                         className="bg-blue-600 text-white hover:bg-blue-700"
-                        onClick={() => (window.location.href = slide.ctaLink)}
+                        onClick={() => navigate(slide.ctaLink)}
                       >
                         <ShoppingBag className="mr-2 h-5 w-5" />
                         {slide.ctaText}
