@@ -57,12 +57,15 @@ const LoginForm = ({ onSuccess, onRegisterClick, onForgotPasswordClick }: LoginF
       const { data, error } = await signIn(email, password, rememberMe);
 
       if (error) {
-        throw new Error(error.message);
+        setError(error.message || "Failed to sign in");
+        setLoading(false);
+        return;
       }
 
       if (onSuccess) onSuccess();
     } catch (err: any) {
-      setError(err.message || "Failed to sign in");
+      console.error("Login error:", err);
+      setError("Network error. Please try again later.");
     } finally {
       setLoading(false);
     }

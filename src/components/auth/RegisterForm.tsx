@@ -116,13 +116,16 @@ const RegisterForm = ({ onSuccess, onLoginClick }: RegisterFormProps) => {
       const { data, error } = await signUp(email, password);
 
       if (error) {
-        throw new Error(error.message);
+        setError(error.message || "Failed to create account");
+        setLoading(false);
+        return;
       }
 
       setSuccess(true);
       if (onSuccess) onSuccess();
     } catch (err: any) {
-      setError(err.message || "Failed to create account");
+      console.error("Registration error:", err);
+      setError("Network error. Please try again later.");
     } finally {
       setLoading(false);
     }

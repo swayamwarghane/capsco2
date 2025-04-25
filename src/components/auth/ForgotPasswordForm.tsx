@@ -33,25 +33,28 @@ const ForgotPasswordForm = ({ onBackToLogin }: ForgotPasswordFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    
+
     // Email validation
     if (!validateEmail(email)) {
       setError("Please enter a valid email address");
       return;
     }
-    
+
     setLoading(true);
 
     try {
       const { error } = await resetPassword(email);
-      
+
       if (error) {
-        throw new Error(error.message);
+        setError(error.message || "Failed to send reset password email");
+        setLoading(false);
+        return;
       }
-      
+
       setSuccess(true);
     } catch (err: any) {
-      setError(err.message || "Failed to send reset password email");
+      console.error("Password reset error:", err);
+      setError("Network error. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -118,9 +121,9 @@ const ForgotPasswordForm = ({ onBackToLogin }: ForgotPasswordFormProps) => {
               autoComplete="email"
             />
           </div>
-          <Button 
-            type="submit" 
-            className="w-full" 
+          <Button
+            type="submit"
+            className="w-full"
             disabled={loading || !email}
           >
             {loading ? (
